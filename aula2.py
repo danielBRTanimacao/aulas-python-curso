@@ -1,0 +1,1 @@
+print(123, sep='=', end='') #sobre o print!

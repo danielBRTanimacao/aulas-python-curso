@@ -16,9 +16,33 @@ dados_pessoa = {
     'altura': 1.6,
 }
 
-(a1, a2), b = pessoa.items() 
-print(a1, b)
+dados_totais = {
+    **pessoa,
+    **dados_pessoa,
+    'nome2': 'Piru'
+}
 
-for value in pessoa.items():
-    print(value[0])
+def mostrar_args(*args, **kwargs):
+    print(f'Não nomeados {args}')
+    for keys, valor in kwargs.items():
+        print(keys, valor)
+
+
+#mostrar_args(**dados_totais)
+#print(dados_totais)
+
+#(a1, a2), b = pessoa.items() 
+#print(a1, b)
+
+#for value in pessoa.items():
+#    print(value[0])
     
+dados = {
+    'n1': 'bubu',
+    'n2': 'bobo',
+    'n3': 'bibi',
+    'n4': 'cucu',
+    'n5': 'gogogo'
+}
+
+mostrar_args(**dados)

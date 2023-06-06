@@ -9,12 +9,18 @@
 # Resultado
 # [('Salvador', 'BA'), ('Ubatuba', 'SP'), ('Belo Horizonte', 'MG')]
 
-# def zipper(l1, l2):
-#     intervalo = min(len(l1), len(l2))
-#     return [(l1[i], l2[i]) for i in range(intervalo)]
-from itertools import zip_longest
+# def zipper(lista1, lista2): SOLUÇÃO 1
+#     interval_max = min((len(lista1)), len(lista2))
+#     return [(lista1[indice], lista2[indice]) for indice in range(interval_max)]
+#
+#
+# print(zipper(lista1, lista2))
 
-l1 = ['Salvador', 'Ubatuba', 'Belo Horizonte']
-l2 = ['BA', 'SP', 'MG', 'RJ']
-print(list(zip(l1, l2)))
-print(list(zip_longest(l1, l2, fillvalue='SEM CIDADE')))
+#print(list(zip(lista1, lista2))) SOLUÇÃO 2
+
+from itertools import zip_longest #SOLUÇÃO 3
+
+lista1 = ['Salvador', 'Ubatuba', 'Belo Horizonte']
+lista2 = ['BA', 'SP', 'MG', 'RJ']
+
+print(list(zip_longest(lista1, lista2, fillvalue='Sem cidade')))

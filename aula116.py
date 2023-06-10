@@ -18,3 +18,26 @@
 # Vamos falar mais sobre o módulo json, mas:
 # json.dump = Gera um arquivo json
 # json.load
+
+import os
+# caminho_arquivo = 'C:\\Users\\danie\\OneDrive\\Área de Trabalho\\vs estudo\\python otavio miranda curso\\python aulas\\'
+# caminho_arquivo += 'aula116.txt'
+caminho_arquivo = 'aula116.txt'
+
+# arquivo = open(caminho_arquivo, 'w')
+
+# arquivo.close()
+# with open(caminho_arquivo, 'w+') as arquivo:
+#     arquivo.write('Linha 1 kk\n')
+#     arquivo.write('linha 2 keke')
+#     arquivo.seek(0, 0)
+#     print(arquivo.read())
+
+with open(caminho_arquivo, 'a', encoding='utf-8') as arquivo:
+    arquivo.write('Atenção kk\n')
+    arquivo.write('linha 1 keke\n')
+    arquivo.write('linha 2\n')
+    arquivo.writelines(('linha 3\n', 'linha 4\n'))
+
+#os.remove(caminho_arquivo)
+# os.rename(caminho_arquivo, 'aula116-2.txt')

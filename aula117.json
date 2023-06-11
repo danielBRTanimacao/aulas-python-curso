@@ -1,0 +1,25 @@
+{
+  "nome": "Bico",
+  "sobrenome": "Seco",
+  "endereco": [
+    {
+      "rua": "Rua bababui",
+      "numero": 23
+    },
+    {
+      "rua": "Rua pirilampo",
+      "numero": 55
+    }
+  ],
+  "altura": 1.8,
+  "numero_preferido": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "dev": false,
+  "nada": null
+}

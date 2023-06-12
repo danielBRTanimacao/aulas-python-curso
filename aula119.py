@@ -1,4 +1,5 @@
 import os
+import json
 
 def listar(tarefas):
     print()
@@ -45,11 +46,30 @@ def adicionar(tarefa, tarefas):
     tarefas.append(tarefa)
 
 
-tarefas = []
+def ler(tarefas, caminho_arquivo):
+    dados = []
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:
+            dados = json.load(arquivo)
+    except FileNotFoundError:
+        print('Arquivo não encontrado!')
+        salvar(tarefas, caminho_arquivo)
+    return dados
+
+
+def salvar(tarefas, caminho_arquivo):
+    dados = tarefas
+    with open(caminho_arquivo, 'w', encoding='utf-8') as arquivo:
+        dados = json.dump(tarefas, arquivo, indent=2, ensure_ascii=False)
+    return dados
+
+
+CAMINHO_ARQUIVO = 'aula119.json'
+tarefas = ler([], CAMINHO_ARQUIVO)
 tarefas_refazer = []
 
 while True:
-    print('Comandos: listar, desfazer, refazer, sair')
+    print('Comandos: listar, desfazer, refazer, clear, ler')
     tarefa = input('Digite uma tarefa ou comando: ')
 
     comandos = {
@@ -59,20 +79,6 @@ while True:
         'clear': lambda: os.system('cls'),
         'adicionar': lambda: adicionar(tarefa, tarefas),
     }
-    comandos = comandos.get(tarefa) if comandos.get(tarefa) is not None else adicionar(tarefa)
+    comandos = comandos.get(tarefa) if comandos.get(tarefa) is not None else comandos['adicionar']
     comandos()
-    # if tarefa == 'listar':
-    #     listar(tarefas)
-    # elif tarefa == 'desfazer':
-    #     desfazer(tarefas, tarefas_refazer)
-    #     listar(tarefas)
-    # elif tarefa == 'refazer':
-    #     refazer(tarefas, tarefas_refazer)
-    #     listar(tarefas)
-    # elif tarefa == 'clear':
-    #     os.system('cls')
-    # elif tarefa == 'sair':
-    #     break
-    # else:
-    #     adicionar(tarefa, tarefas)
-    #     listar(tarefas)
+    salvar(tarefas, CAMINHO_ARQUIVO)

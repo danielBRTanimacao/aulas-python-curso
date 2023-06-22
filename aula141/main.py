@@ -1,0 +1,3 @@
+# Abstração
+class Log:
+    ...

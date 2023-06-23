@@ -1,0 +1,7 @@
+Success: Deu bom kkk (LogFileMixin)
+Error: Skibididop (LogFileMixin)
+Success: Deu bom kkk (LogFileMixin)
+Error: Skibididop (LogFileMixin)
+Success: Deu bom kkk (LogFileMixin)
+Success: J4 core está ligado :) (SmartPhone)
+Error: Moto g5 está desligado :) (SmartPhone)

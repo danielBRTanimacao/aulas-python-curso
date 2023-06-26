@@ -7,3 +7,22 @@
 # Levantando (raise) / Lançando (throw) exceções
 # Relançando exceções
 # Adicionando notas em exceções (3.11.0)
+class MyError(Exception):
+    ...
+
+
+class OtherError(Exception):
+    ...
+
+
+def levantar():
+    exception_ = MyError('MEu erro aqui menor!')
+    raise exception_
+
+try:
+    levantar()
+except (MyError, ZeroDivisionError) as error:
+    print(error.__class__.__name__)
+    print(error)
+    exception_ = OtherError('Vou lançar de novo kk')
+    raise exception_ from error

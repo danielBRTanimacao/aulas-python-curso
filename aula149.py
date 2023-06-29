@@ -34,8 +34,20 @@ class MyOpen:
         print('Fechando arquivo')
         self._file.close()
 
+        # raise class_exeption(*exception_.args).with_traceback(traceback_)
+
+        # print(class_exeption)
+        # print(exception_)
+        # print(traceback_)
+        # raise ConnectionError('Não deu para conectar!')
+        exception_.add_note('Minha Nota')
+
+        # return True #tratei a exceção
+
 
 #instance = MyOpen('aula149.txt', 'w')
 with MyOpen('aula149.txt', 'w') as file:
     file.write('Linha 1 ksks\n')
+    file.write('Linha 2\n', 1)
+    file.write('Linha 3\n')
     

@@ -23,6 +23,10 @@
 # sobre o porquê)."
 # — Tim Peters (CPython Core Developer)
 
-# object acima
+# object esta acima
 # class Foo:
 #     ...
+
+Foo = type('Foo', (object), {})
+f = Foo()
+print(type(Foo))

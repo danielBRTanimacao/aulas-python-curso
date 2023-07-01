@@ -27,6 +27,15 @@
 # class Foo:
 #     ...
 
-Foo = type('Foo', (object), {})
-f = Foo()
-print(type(Foo))
+class Person:
+    def __new__(cls, *args, **kwargs):
+        print('Meu NEW')
+        instance = super().__new__(cls)
+        return instance
+
+    def __init__(self, name):
+        print('Meu INIT')
+        self.name = name
+
+
+person1 = Person('Bababui')

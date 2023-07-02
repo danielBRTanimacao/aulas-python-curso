@@ -26,7 +26,10 @@
 # object esta acima
 # class Foo:
 #     ...
+class Meta(type):
+    ...
 
+    
 class Person:
     def __new__(cls, *args, **kwargs):
         print('Meu NEW')

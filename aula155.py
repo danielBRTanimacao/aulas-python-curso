@@ -22,15 +22,11 @@
 # com certeza que precisam delas e não precisam de uma explicação
 # sobre o porquê)."
 # — Tim Peters (CPython Core Developer)
-
-# object esta acima
-# class Foo:
-#     ...
 class Meta(type):
     ...
 
     
-class Person:
+class Person(metaclass=Meta):
     def __new__(cls, *args, **kwargs):
         print('Meu NEW')
         instance = super().__new__(cls)
@@ -42,3 +38,4 @@ class Person:
 
 
 person1 = Person('Bababui')
+

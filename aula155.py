@@ -22,6 +22,9 @@
 # com certeza que precisam delas e não precisam de uma explicação
 # sobre o porquê)."
 # — Tim Peters (CPython Core Developer)
+from typing import Any
+
+
 def my_repr(self):
     return f'{type(self).__name__}({self.__dict__})'
 
@@ -36,6 +39,15 @@ class Meta(type):
             raise NotImplementedError('Implementa o metodo "say"!')
 
         return cls
+    
+    def __call__(self, *args, **kwargs):
+        instance = super().__call__(*args, **kwargs)
+        print(instance.__dict__)
+
+        if 'name' not in instance.__dict__:
+            raise NotImplementedError('Implemente o atributo "name"!')
+
+        return instance
 
     
 class Person(metaclass=Meta):

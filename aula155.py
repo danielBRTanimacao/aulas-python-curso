@@ -22,8 +22,20 @@
 # com certeza que precisam delas e não precisam de uma explicação
 # sobre o porquê)."
 # — Tim Peters (CPython Core Developer)
+def my_repr(self):
+    return f'{type(self).__name__}({self.__dict__})'
+
+
 class Meta(type):
-    ...
+    def __new__(mcs, name, bases, dct):
+        print('METACLASS NEW')
+        cls = super().__new__(mcs, name, bases, dct)
+        cls.__repr__ = my_repr
+
+        if 'say' not in cls.__dict__ or not callable(cls.__dict__['say']):
+            raise NotImplementedError('Implementa o metodo "say"!')
+
+        return cls
 
     
 class Person(metaclass=Meta):
@@ -35,7 +47,10 @@ class Person(metaclass=Meta):
     def __init__(self, name):
         print('Meu INIT')
         self.name = name
+    
+    def say(self):
+        print('Falando...')
 
 
 person1 = Person('Bababui')
-
+print(person1)

@@ -1,4 +1,4 @@
 # import one_line
-import documentando_funcoes
+import documentando_classes
 
-help(documentando_funcoes)
+help(documentando_classes)

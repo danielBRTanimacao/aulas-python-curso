@@ -14,12 +14,25 @@
 # membro = Classe(valor), Classe['chave']
 # chave = Classe.chave.name
 # valor = Classe.chave.value
+import enum
 
-def mover(direcao):
-    print(f'Movendo para {direcao}')
+# Directions = enum.Enum('Directions', ['ESQUERDA', 'DIREITA']) #const
+# Esse tipo Directions ja funciona e o programa percebi o seu tipo
+# print(Directions.ESQUERDA, Directions(1), Directions['ESQUERDA'])
+# print(Directions(1).name, Directions.ESQUERDA.value)
+
+class Directions(enum.Enum):
+    ESQUERDA = enum.auto()
+    DIREITA = enum.auto()
+    CIMA = enum.auto()
+
+def mover(direction: Directions):
+    if not isinstance(direction, Directions):
+        raise ValueError('Direção não encontrada')
+    print(f'Movendo para a direção {direction.name.lower()}')
 
 
-mover('esquerda')
-mover('direita')
-mover('acima')
-mover('abaixo')
+mover(Directions.ESQUERDA)
+mover(Directions.DIREITA)
+mover(Directions.CIMA)
+#mover('lado')

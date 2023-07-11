@@ -28,16 +28,22 @@ class Banco:
             return True
         return False        
 
-    def autenticar(self, cliente, conta):
+    def _checa_se_conta_e_do_cliente(self, cliente, conta):
+        if conta is cliente.conta:
+            return True
+        return False
+
+    def autenticar(self, cliente: pessoas.Pessoa, conta: contas.Conta):
         return self._checa_agencia(conta) and \
             self._checa_cliente(cliente) and \
-            self._checa_conta(conta)
+            self._checa_conta(conta) and \
+            self._checa_se_conta_e_do_cliente(cliente, conta)
 
     def __repr__(self) -> str:
         class_name = type(self).__name__
         attr = f'({self.agencias!r}, {self.clientes!r}, {self.contas!r})'
         return f'{class_name}{attr}'
-    
+
 
 if __name__ == '__main__':
     cliente_1 = pessoas.Cliente('Bababui', 69)
@@ -50,4 +56,9 @@ if __name__ == '__main__':
 
     banco = Banco()
     banco.clientes.extend([cliente_1, cliente_2])
+    banco.contas.extend([conta_corrente_1, conta_poupanca_1])
+    banco.agencias.extend([123, 321])
+
+    print(banco.autenticar(cliente_1, conta_corrente_1))
+
     print(banco)

@@ -7,24 +7,26 @@
 # doc: https://docs.python.org/3/library/dataclasses.html
 from dataclasses import dataclass
 
-@dataclass
+@dataclass(init=False)
 class Pessoa:
     nome: str
     sobrenome: str
 
-    @property
-    def nome_completo(self):
-        return f'{self.nome} {self.sobrenome}'
+    def __post_init__(self):
+        self.nome_completo = f'{self.nome} {self.sobrenome}'
+
+    # @property
+    # def nome_completo(self):
+    #     return f'{self.nome} {self.sobrenome}'
     
-    @nome_completo.setter
-    def nome_completo(self, valor: str):
-        nome, *sobrenome = valor.split()
-        self.nome = nome
-        self.sobrenome = " ".join(sobrenome)
+    # @nome_completo.setter
+    # def nome_completo(self, valor: str):
+    #     nome, *sobrenome = valor.split()
+    #     self.nome = nome
+    #     self.sobrenome = " ".join(sobrenome)
 
 
 if __name__ == '__main__':
     p1 = Pessoa('Bababui', 'Buibaba')
     # print(p1)
-    p1.nome_completo = 'Bico Seco'
     print(p1.nome_completo)

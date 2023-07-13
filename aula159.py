@@ -12,8 +12,13 @@ class Pessoa:
     nome: str
     sobrenome: str
 
-    def __post_init__(self):
+    def __init__(self, nome: str, sobrenome: str):
+        self.nome = nome
+        self.sobrenome = sobrenome
         self.nome_completo = f'{self.nome} {self.sobrenome}'
+
+    # def __post_init__(self):
+    #     self.nome_completo = f'{self.nome} {self.sobrenome}'
 
     # @property
     # def nome_completo(self):

@@ -15,10 +15,11 @@ from datetime import datetime
 from pytz import timezone
 
 # data = datetime.now(timezone('America/Recife'))
-data = datetime.now(timezone('Asia/Tokyo'))
-print(data)
+data = datetime.now()
 
-
+print(data.timestamp())
+print(datetime.fromtimestamp(1689785927))
+# data = datetime(2023, 2, 12, tzinfo=timezone('Asia/Tokyo'))
 # data_str_data = '2023-02-12'
 # data_str_data = '18/07/2023'
 # data_str_format = '%d/%m/%Y'

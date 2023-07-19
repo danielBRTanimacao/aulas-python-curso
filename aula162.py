@@ -12,11 +12,15 @@
 # pip install pytz types-pytz
 
 from datetime import datetime
+from pytz import timezone
 
-data_str_data = '2023-02-12'
-data_str_data = '18/07/2023'
-data_str_format = '%d/%m/%Y'
-# data = datetime(2023, 2, 12)
-data = datetime.strptime(data_str_data, data_str_format)
+# data = datetime.now(timezone('America/Recife'))
+data = datetime.now(timezone('Asia/Tokyo'))
 print(data)
 
+
+# data_str_data = '2023-02-12'
+# data_str_data = '18/07/2023'
+# data_str_format = '%d/%m/%Y'
+# # data = datetime(2023, 2, 12)
+# data = datetime.strptime(data_str_data, data_str_format)

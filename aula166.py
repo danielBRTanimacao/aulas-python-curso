@@ -18,3 +18,9 @@ import calendar
 # numero_primeiro_dia , ultimo_dia = calendar.monthrange(2023, 8)
 # print(calendar.day_name[numero_primeiro_dia])
 # print(calendar.day_name[calendar.weekday(2023, 8, ultimo_dia)])
+# print(calendar.monthcalendar(2023, 8))
+for weeks in calendar.monthcalendar(2023, 8):
+    for day in weeks:
+        if day == 0:
+            continue
+        print(day)

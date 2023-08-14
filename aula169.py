@@ -14,3 +14,13 @@
 # os.path.exists: verifica se um caminho especificado existe.
 # os.path só trabalha com caminhos de arquivos e não faz nenhuma
 # operação de entrada/saída (I/O) com arquivos em si.
+
+import os
+
+os.system('cls')
+
+path_ = os.path.join('Desktop', 'curso', 'arquivo.txt')
+print(path_)
+directory, file = os.path.split(path_)
+name_file, extend_file = os.path.splitext(file)
+print(name_file, extend_file)

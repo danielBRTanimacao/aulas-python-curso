@@ -7,3 +7,9 @@
 # operacional a partir do seu código Python.
 # Windows 11 (PowerShell), Linux, Mac = clear
 # Windows (antigo, cmd) = cls
+
+import os
+
+os.system('cls') #windows
+
+print('a'*56)

@@ -3,3 +3,5 @@
 # maneira recursiva. Ela gera uma sequência de tuplas, onde cada tupla possui
 # três elementos: o diretório atual (root), uma lista de subdiretórios (dirs)
 # e uma lista dos arquivos do diretório atual (files).
+
+import os

@@ -2,5 +2,4 @@
 # Vamos copiar arquivos de uma pasta para outra.
 # Copiar -> shutil.copy
 
-import os
 import shutil

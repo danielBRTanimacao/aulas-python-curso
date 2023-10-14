@@ -14,7 +14,8 @@ PATH_DOWNLOAD = os.path.join(HOME, 'Downloads')
 ORIGINAL_FOLDER = os.path.join(PATH_DOWNLOAD, 'exemplo_teste_aula')
 NEW_FOLDER = os.path.join(PATH_DOWNLOAD, 'exemplo02')
 
-
+shutil.rmtree(NEW_FOLDER)
+shutil.copytree(ORIGINAL_FOLDER, NEW_FOLDER)
 
 # os.makedirs(NEW_FOLDER, exist_ok=True)
 

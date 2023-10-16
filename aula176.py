@@ -9,6 +9,8 @@
 # False         false
 # None          null
 
+import json
+
 string_json = '''
 {
     "title": "O Senhor dos Anéis: A Sociedade do Anel",
@@ -21,4 +23,6 @@ string_json = '''
 }
 '''
 
-print(string_json)
+movie = json.loads(string_json)
+# print(movie)
+print(movie['title'])

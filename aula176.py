@@ -10,6 +10,17 @@
 # None          null
 
 import json
+from typing import TypedDict
+
+class Movie(TypedDict):
+    title: str
+    original_title: str
+    is_movie: bool
+    imdb_rating: float
+    year: int
+    characters: list[str]
+    budget: None | float
+
 
 string_json = '''
 {
@@ -23,6 +34,8 @@ string_json = '''
 }
 '''
 
-movie = json.loads(string_json)
+movie: Movie = json.loads(string_json)
 # print(movie)
-print(movie['title'])
+# print(movie['title'])
+# print(movie['year'] + 10)
+print(json.dumps(movie, ensure_ascii=False, indent=2))

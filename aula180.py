@@ -11,3 +11,31 @@ lista_clientes = [
     {'Nome': 'João Silva', 'Endereço': 'R. 2, "1"'},
     {'Nome': 'Maria Sol', 'Endereço': 'Av B, 3A'},
 ]
+
+with open(CAMINHO_CSV, 'w', encoding='utf-8') as arquivo:
+    colunas = lista_clientes[0].keys()
+    escritor = csv.DictWriter(
+        arquivo,
+        fieldnames=colunas
+    )
+    escritor.writeheader() # manda escrever o header
+
+    for cliente in lista_clientes:
+        escritor.writerow(cliente)
+
+# lista_clientes = [
+#     ['Luiz Otávio', 'Av 1, 22'],
+#     ['Luiz Otávio', 'Av 1, 22'],
+#     ['Luiz Otávio', 'Av 1, 22'],
+# ]
+
+# with open(CAMINHO_CSV, 'w', encoding='utf-8') as arquivo:
+#     # colunas = lista_clientes[0].keys()
+#     colunas = ['Nome', 'Endereço']
+#     escritor = csv.writer(arquivo)
+
+#     escritor.writerow(colunas)
+
+#     for cliente in lista_clientes:
+#         print(cliente)
+#         escritor.writerow(cliente)

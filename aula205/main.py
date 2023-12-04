@@ -9,6 +9,7 @@ connection = sqlite3.connect(DB_FILE)
 cursor = connection.cursor()
 
 # SQL
+cursor.execute()
 
 cursor.close()
 connection.close()

@@ -13,8 +13,11 @@ cursor.execute(
     f'CREATE TABLE IF NOT EXISTS {TABLE_NAME}'
     '('
     'id INTEGER PRIMARY KEY AUTOINCREMENT,' #primary key
+    'name TEXT,'
+    'wheight REAL'
     ')'
 )
+connection.commit()
 
 cursor.close()
 connection.close()

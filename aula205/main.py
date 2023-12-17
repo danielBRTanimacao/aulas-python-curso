@@ -30,11 +30,28 @@ cursor.execute(
 connection.commit()
 
 # Registrar valores
-# CUIDADO: com sql injection 
-connection.execute(
-    f'INSERT INTO {TABLE_NAME} (id, name, weight) '
-    'VALUES (NULL, "Daniel Batata", 103.2), (NULL, "Cururu Pidão", 73)'
+# CUIDADO: com sql injection NÃO PRECISA MAIS DE CUIDADO
+sql = (
+    f'INSERT INTO {TABLE_NAME} (name, weight) '
+    'VALUES '
+    '(:nome, :peso)' # Agora ele sabe que os valores estão separados
 )
+# connection.execute(sql, ["Bico Seco", 1]) Execute, executa uma unica coisa e executemany varias coisas
+# connection.executemany(
+#     sql, (
+#         ("Bico Seco", 1), ("Cururu Pidão", 4)
+#     )
+# ) 
+connection.execute(sql, {'nome': "Silas Mahoraga", 'peso': 10})
+connection.executemany(
+    sql, (
+        {'nome': "Silas Mahoraga", 'peso': 10},
+        {'nome': "Akasa", 'peso': 12},
+        {'nome': "Pidão", 'peso': 2},
+        {'nome': "Cleitin do Grau", 'peso': 6}
+    )
+)
+print(sql)
 connection.commit()
 
 cursor.close()

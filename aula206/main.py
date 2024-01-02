@@ -18,27 +18,100 @@ connection = pymysql.connect(
     database=os.environ['MYSQL_DATABASE'],
     charset='utf8mb4'
 )
+
 with connection:
     with connection.cursor() as cursor:
-        cursor.execute(
-            f'CREATE_TABLE IF NOT EXISTS {TABLE_NAME} ('
+        cursor.execute(  # type: ignore
+            f'CREATE TABLE IF NOT EXISTS {TABLE_NAME} ('
             'id INT NOT NULL AUTO_INCREMENT, '
-            'name VARCHAR(50) NOT NULL, '
-            'age INT NOT NULL, '
-            'PRIMARY KEY (id) '
+            'nome VARCHAR(50) NOT NULL, '
+            'idade INT NOT NULL, '
+            'PRIMARY KEY (id)'
             ') '
         )
-        # CUIDADO ISSO LIMPA A TABELA
-        cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')
-        connection.commit() # so para lembrar
-        
-        # COMEÇA A MANIPULAR DADOS A PARTIR DAQUI
+        # CUIDADO: ISSO LIMPA A TABELA
+        cursor.execute(f'TRUNCATE TABLE {TABLE_NAME}')  # type: ignore
+    connection.commit()
 
-        with connection.cursor as cursor:
-            cursor.execute(
-                f'INSERT TO {TABLE_NAME} '
-                '(name, age) VALUES ("Cururu", 20) '
-            )
-        connection.commit()
+    # Começo a manipular dados a partir daqui
 
+    # Inserindo um valor usando placeholder e um iterável
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%s, %s) '
+        )
+        data = ('Cururu', 18)
+        result = cursor.execute(sql, data)  # type: ignore
+        # print(sql, data)
+        # print(result)
+    connection.commit()
+
+    # Inserindo um valor usando placeholder e um dicionário
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%(name)s, %(age)s) '
+        )
+        data2 = {
+            "age": 37,
+            "name": "Rock Lee",
+        }
+        result = cursor.execute(sql, data2)  # type: ignore
+        # print(sql)
+        # print(data2)
+        # print(result)
+    connection.commit()
+
+    # Inserindo vários valores usando placeholder e um tupla de dicionários
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%(name)s, %(age)s) '
+        )
+        data3 = (
+            {"name": "Bico seco", "age": 33, },
+            {"name": "Luis", "age": 74, },
+            {"name": "Rose", "age": 53, },
+        )
+        result = cursor.executemany(sql, data3)  # type: ignore
+        # print(sql)
+        # print(data3)
+        # print(result)
+    connection.commit()
+
+    # Inserindo vários valores usando placeholder e um tupla de tuplas
+    with connection.cursor() as cursor:
+        sql = (
+            f'INSERT INTO {TABLE_NAME} '
+            '(nome, idade) '
+            'VALUES '
+            '(%s, %s) '
+        )
+        data4 = (
+            ("Siri", 22, ),
+            ("Helena", 15, ),
+        )
+        result = cursor.executemany(sql, data4)  # type: ignore
+        # print(sql)
+        # print(data4)
+        # print(result)
+    connection.commit()
+
+    # Lendo os valores com SELECT
+    with connection.cursor() as cursor:
+        sql = (
+            f'SELECT * FROM {TABLE_NAME} '
+        )
+        cursor.execute(sql)  # type: ignore
+        data5 = cursor.fetchall()  # type: ignore
+
+        for row in data5:
+            print(row)
     

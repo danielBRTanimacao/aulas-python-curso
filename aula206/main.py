@@ -110,8 +110,7 @@ with connection:
             f'SELECT * FROM {TABLE_NAME} '
         )
         cursor.execute(sql)  # type: ignore
-        data5 = cursor.fetchall()  # type: ignore
+        data5 = cursor.fetchall() # type: ignore
 
         for row in data5:
             print(row)
-    

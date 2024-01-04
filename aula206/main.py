@@ -123,7 +123,7 @@ with connection:
 
         # for row in data5:
         #     print(row)
-    
+    # APAGANDO COM DELETE WHERE E PLACEHOLDERS
     with connection.cursor() as cursor:
         sql = (
             f'DELETE FROM {TABLE_NAME} '
@@ -137,3 +137,20 @@ with connection:
 
         for row in cursor.fetchall():
             print(row)
+
+    # EDITANDO COM UPDATE, WHERE E PLACEHOLDER
+    with connection.cursor() as cursor:
+        sql = (
+            f'UPDATE FROM {TABLE_NAME} '
+            'SET nome=%s, idade=%s '
+            'WHERE id = %s '
+        )
+        # PALAVRA DELETE E UPDATE PRECISA DE WHERE
+        cursor.execute(sql, ('pidao', 103, 4))  # type: ignore
+
+        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+
+        for row in cursor.fetchall():
+            print(row)
+            
+    connection.commit()

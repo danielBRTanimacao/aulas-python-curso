@@ -3,11 +3,14 @@
 # Pypy: https://pypi.org/project/pymysql/
 # GitHub: https://github.com/PyMySQL/PyMySQL
 import os
+from typing import cast
 
 import dotenv
 import pymysql
+import pymysql.cursors
 
 TABLE_NAME = 'customers'
+CURRENT_CURSOR = pymysql.cursors.DictCursor
 
 dotenv.load_dotenv()
 
@@ -16,7 +19,8 @@ connection = pymysql.connect(
     user=os.environ['MYSQL_USER'],
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
-    charset='utf8mb4'
+    charset='utf8mb4',
+    cursorclass=CURRENT_CURSOR,
 )
 
 with connection:
@@ -43,7 +47,7 @@ with connection:
             'VALUES '
             '(%s, %s) '
         )
-        data = ('Cururu', 18)
+        data = ('Luiz', 18)
         result = cursor.execute(sql, data)  # type: ignore
         # print(sql, data)
         # print(result)
@@ -59,7 +63,7 @@ with connection:
         )
         data2 = {
             "age": 37,
-            "name": "Rock Lee",
+            "name": "Le",
         }
         result = cursor.execute(sql, data2)  # type: ignore
         # print(sql)
@@ -76,9 +80,9 @@ with connection:
             '(%(name)s, %(age)s) '
         )
         data3 = (
-            {"name": "Bico seco", "age": 33, },
-            {"name": "Luis", "age": 74, },
-            {"name": "Rose", "age": 53, },
+            {"name": "Cururu", "age": 90, },
+            {"name": "Bico seco", "age": 74, },
+            {"name": "pidao", "age": 33, },
         )
         result = cursor.executemany(sql, data3)  # type: ignore
         # print(sql)
@@ -97,6 +101,7 @@ with connection:
         data4 = (
             ("Siri", 22, ),
             ("Helena", 15, ),
+            ("Luiz", 18, ),
         )
         result = cursor.executemany(sql, data4)  # type: ignore
         # print(sql)
@@ -106,51 +111,67 @@ with connection:
 
     # Lendo os valores com SELECT
     with connection.cursor() as cursor:
-        menor_id = 0
-        maior_id = 5
         # menor_id = int(input('Digite o menor id: '))
         # maior_id = int(input('Digite o maior id: '))
+        menor_id = 2
+        maior_id = 4
 
         sql = (
             f'SELECT * FROM {TABLE_NAME} '
-            'WHERE id BETWEEN %s AND %s '
-            # 'WHERE id >= %s AND <= %s '
+            'WHERE id BETWEEN %s AND %s  '
         )
 
         cursor.execute(sql, (menor_id, maior_id))  # type: ignore
-        # print(cursor.mogrify(sql, (menor_id, maior_id)))
-        data5 = cursor.fetchall() # type: ignore
+        # print(cursor.mogrify(sql, (menor_id, maior_id)))  # type: ignore
+        data5 = cursor.fetchall()  # type: ignore
 
         # for row in data5:
-        #     print(row)
-    # APAGANDO COM DELETE WHERE E PLACEHOLDERS
+        # print(row)
+
+    # Apagando com DELETE, WHERE e placeholders no PyMySQL
     with connection.cursor() as cursor:
         sql = (
             f'DELETE FROM {TABLE_NAME} '
-            'WHERE id = %s '
+            'WHERE id = %s'
         )
-        # PALAVRA DELETE E UPDATE PRECISA DE WHERE
-        cursor.execute(sql, (2,))  # type: ignore
+        cursor.execute(sql, (1,))  # type: ignore
         connection.commit()
 
-        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')  # type: ignore
 
-        for row in cursor.fetchall():
-            print(row)
+        # for row in cursor.fetchall():  # type: ignore
+        #     print(row)
 
-    # EDITANDO COM UPDATE, WHERE E PLACEHOLDER
+    # Editando com UPDATE, WHERE e placeholders no PyMySQL
     with connection.cursor() as cursor:
+        cursor = cast(CURRENT_CURSOR, cursor)
+
         sql = (
-            f'UPDATE FROM {TABLE_NAME} '
+            f'UPDATE {TABLE_NAME} '
             'SET nome=%s, idade=%s '
-            'WHERE id = %s '
+            'WHERE id=%s'
         )
-        # PALAVRA DELETE E UPDATE PRECISA DE WHERE
-        cursor.execute(sql, ('pidao', 103, 4))  # type: ignore
+        cursor.execute(sql, ('Eleonor', 102, 4))
 
-        cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+        cursor.execute(
+            f'SELECT id from {TABLE_NAME} ORDER BY id DESC LIMIT 1'
+        )
+        lastIdFromSelect = cursor.fetchone()
 
-        for row in cursor.fetchall():
+        resultFromSelect = cursor.execute(f'SELECT * FROM {TABLE_NAME} ')
+
+        data6 = cursor.fetchall()
+
+        for row in data6:
             print(row)
-            
+
+        print('resultFromSelect', resultFromSelect)
+        print('len(data6)', len(data6))
+        print('rowcount', cursor.rowcount)
+        print('lastrowid', cursor.lastrowid)
+        print('lastrowid na mão', lastIdFromSelect)
+
+        cursor.scroll(0, 'absolute')
+        print('rownumber', cursor.rownumber)
+
     connection.commit()

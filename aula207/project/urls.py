@@ -22,12 +22,17 @@ from django.http import HttpResponse
 # MODEL VIEW TEMPLATE variação de MODEL VIEW CONTROL
 # MVT (MVC)
 
-def my_view(request):
-    print('Posso fazer o que eu quiser kkkk')
-    return HttpResponse('Uma mensagem para alguem especial')
+def home(request):
+    print("HOME")
+    return HttpResponse('Home')
+
+def blog(request):
+    print('blog')
+    return HttpResponse('blog')
 
 
 urlpatterns = [
+    path('', home),
+    path('blog/', blog),
     path('admin/', admin.site.urls),
-    path('blog/', my_view),
 ]

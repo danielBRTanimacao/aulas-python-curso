@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
+    {% include "global/partials/head.html" %}
     <body>
-        <h1>Exemplo kk</h1>
+        <h1>{% block texto %} {{text}} {% endblock texto %}</h1>
     </body>
 </html>

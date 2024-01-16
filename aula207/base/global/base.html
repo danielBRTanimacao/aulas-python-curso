@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
     {% include "global/partials/head.html" %}
+
     <body>
+        {% include "global/partials/menu.html" %}
         <h1>{% block texto %}{% endblock texto %}</h1>
         {% include "global/partials/paragraph.html" %}
     </body>

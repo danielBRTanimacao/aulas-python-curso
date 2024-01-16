@@ -1,7 +1,7 @@
 {% extends "global/base.html" %} {% block texto %}Aqui o blog{% endblock texto%}
 
 {% block posts %}
-    {% include "global/partials/postblock.html" %} 
-    {% include "global/partials/postblock.html" %} 
-    {% include "global/partials/postblock.html" %} 
+    {% for varpost in posts %}
+        {% include "global/partials/postblock.html" %} 
+    {% endfor %}
 {% endblock posts %}

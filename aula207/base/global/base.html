@@ -7,5 +7,9 @@
         {% include "global/partials/menu.html" %}
         <h1>{% block texto %}{% endblock texto %}</h1>
         {% include "global/partials/paragraph.html" %}
+        <main class="content">
+            {% block posts %}{% endblock posts %}
+            {% block home %}{% endblock home %}
+        </main>
     </body>
 </html>

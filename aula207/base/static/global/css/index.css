@@ -1,8 +1,15 @@
 * {
     font-family: sans-serif, normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
     background: rgba(34, 34, 34, 0.285);
     color: rgb(27, 27, 27);
+}
+
+a {
+    text-decoration: none;
 }

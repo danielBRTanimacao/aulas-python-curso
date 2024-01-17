@@ -5,7 +5,11 @@
 
     <body>
         {% include "global/partials/menu.html" %}
-        <h1>{% block texto %}{% endblock texto %}</h1>
+
+        {% if text %}
+            <h1>{% block texto %}{% endblock texto %}</h1>
+        {% endif %}
+
         {% include "global/partials/paragraph.html" %}
         <main class="content">
             {% block posts %}{% endblock posts %}

@@ -1,6 +1,10 @@
 <article class="post">
     <header>
-        <h2 class="post__title">{{ varpost.title }}</h2>
+        <h2 class="post__title">
+            <a href="{% url "blog:post" varpost.id %}" >
+                {{ varpost.title }}
+            </a>
+        </h2>
     </header>
     <div class="post__body">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates vel

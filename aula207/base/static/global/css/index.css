@@ -32,6 +32,27 @@ body {
     border-radius: 15px 30px;
 }
 
+.menu {
+    background: rgb(50, 84, 0);
+    box-shadow: -10px 1px 5rem rgb(50, 84, 0);
+    padding: 0 1.5rem;
+}
+
+.menu__link {
+    display: flex;
+    list-style: none;
+}
+
+.menu__link a {
+    display: block;
+    padding: 1.5rem;
+    color: rgb(240, 240, 240) !important;
+}
+
+.container {
+    padding: 5rem;
+}
+
 @media (min-width: 600px) {
     .content:not(:has(.single-post)) {
         grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
@@ -39,11 +60,12 @@ body {
 }
 
 a {
+    color: rgb(0, 209, 56);
     text-decoration: none;
 }
 
 a:visited {
-    color: black;
+    color: rgb(3, 164, 0);
 }
 
 a:hover {
